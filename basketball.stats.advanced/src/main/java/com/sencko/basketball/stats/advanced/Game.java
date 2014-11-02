@@ -134,7 +134,7 @@ public class Game {
         String fname;// "Valentin",
         Integer fg_m;// "2",
         Integer ft_pc;// "38",
-        String mins;// "28:46",
+        Integer mins;// "28:46",
         Integer fg3_m;// "0",
         Integer fg3_a;// "3",
         Integer fou_pf;// "0",

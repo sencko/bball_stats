@@ -14,9 +14,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -39,12 +40,20 @@ public class FIBAJsonParser {
     public static void main(String[] args) throws Exception {
         readLocation("48965/13/13/23/68uR30BQLmzJM");
         readLocation("48965/13/15/86/78CJrCjRx5mh6");
+        //  readLocation("48965/13/13/18/12pOKqzKs5nE");
+        readLocation("48965/13/29/11/33upB2PIPn3MI");
+
+        readLocation("48965/13/13/21/38Gqht27dPT1");
+        readLocation("48965/13/15/84/999JtqK7Eao");
+        readLocation("48965/13/29/07/66ODts76QU17A");
         // Game short_game = builder.create().fromJson(new InputStreamReader(FIBAJsonParser.class.getResourceAsStream("game_short.json")), Game.class);
         //   Game game = builder.create().fromJson(new InputStreamReader(FIBAJsonParser.class.getResourceAsStream("game1.json")), Game.class);
         //  analyzeGame(game);
     }
 
     private static class IntegerAdapter extends TypeAdapter<Integer> {
+
+        static Pattern pattern = Pattern.compile("(\\d\\d):(\\d\\d)");
 
         public IntegerAdapter() {
         }
@@ -68,6 +77,13 @@ public class FIBAJsonParser {
                     String stringValue = reader.nextString().trim();
                     if (stringValue.length() == 0) {
                         return null;
+                    } else {
+                        Matcher matcher = pattern.matcher(stringValue);
+                        if (matcher.matches()) {
+                           Integer ret =  Integer.parseInt(matcher.group(1)) * 60 + Integer.parseInt(matcher.group(2));
+                         //  System.out.println(stringValue +" \t" + ret);
+                             return(ret);
+                        }
                     }
                     return Integer.parseInt(stringValue);
                 }
@@ -139,7 +155,7 @@ public class FIBAJsonParser {
                 }
             }
         }
-   //     System.out.println(Arrays.deepToString(plusMinusPlayers));
+        //     System.out.println(Arrays.deepToString(plusMinusPlayers));
 
         for (int i = 0; i < 2; i++) {
             HashMap<String, Integer> board = plusMinusPlayers[i][0];
