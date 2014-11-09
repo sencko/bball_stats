@@ -7,35 +7,31 @@ package com.sencko.basketball.stats.advanced;
 
 import com.sencko.basketball.stats.advanced.objects.Game;
 import com.google.gson.GsonBuilder;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.sencko.basketball.stats.advanced.objects.Action;
 import com.sencko.basketball.stats.advanced.objects.Event;
 import com.sencko.basketball.stats.advanced.objects.EventType;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.net.URLConnection;
-import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import org.apache.commons.io.IOUtils;
 
 /**
  *
  * @author i028512
  */
 public class FIBAJsonParser {
-    
-    static Logger logger = Logger.getLogger(FIBAJsonParser.class.getCanonicalName());
+
+    static final Logger logger = Logger.getLogger(FIBAJsonParser.class.getCanonicalName());
 
     public static void readLocation(String location) throws IOException {
         InputStream jsonInputStream = null;
@@ -50,25 +46,33 @@ public class FIBAJsonParser {
             URL url = new URL(prefix + location + suffix);
             logger.log(Level.FINEST, "Downloading file {0} from internet", url.toString());
             URLConnection connection = url.openConnection();
-          //  connection.setRequestProperty("Accept-Charset", "UTF-8");
+            //  connection.setRequestProperty("Accept-Charset", "UTF-8");
+            //    System.out.println(connection.getRequestProperties());
             connection.connect();
-            System.out.println(connection.getHeaderFields());
+            //   System.out.println(connection.getHeaderFields());
             jsonInputStream = connection.getInputStream();
         }
+        String readString = readStreamToString(jsonInputStream);
 
-        Game game = builder.create().fromJson(new BufferedReader(new InputStreamReader(jsonInputStream)), Game.class);
-    /*    if (!f.exists()){
-             logger.log(Level.FINEST, "Saving file {0} to cache", f.getCanonicalPath());
-            FileWriter fileWriter = new FileWriter(f);
-            builder.create().toJson(game, Game.class, new JsonWriter(fileWriter));
-            fileWriter.close();
-        }*/
+        Game game = builder.create().fromJson(readString, Game.class);
+        if (!f.exists()) {
+            logger.log(Level.FINEST, "Saving file {0} to cache", f.getCanonicalPath());
+            FileOutputStream fileWriter = new FileOutputStream(f);
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(fileWriter, "UTF-8");
+            try (JsonWriter jsonWriter = new JsonWriter(outputStreamWriter)) {
+           //     jsonWriter.setIndent("  ");
+                builder.create().toJson(game, Game.class, jsonWriter);
+                jsonWriter.flush();
+            }
+
+        }
         analyzeGame(game);
     }
     static GsonBuilder builder;
 
     public static void main(String[] args) throws Exception {
-        builder = new GsonBuilder().registerTypeAdapter(Integer.class, new IntegerAdapter()).registerTypeAdapter(String.class, new StringAdapter()).setPrettyPrinting();
+        builder = new GsonBuilder().registerTypeAdapter(Integer.class, new IntegerAdapter()).registerTypeAdapter(String.class, new StringAdapter()).registerTypeAdapter(Action.class, new ActionAdapter()).setPrettyPrinting();
+
         readLocation("48965/13/13/23/68uR30BQLmzJM");
         readLocation("48965/13/15/86/78CJrCjRx5mh6");
         readLocation("48965/13/13/18/12pOKqzKs5nE");
@@ -82,7 +86,6 @@ public class FIBAJsonParser {
         //  analyzeGame(game);
     }
 
-
     static void analyzeGame(Game game) {
         HashSet[] playersInGameTeam = {new HashSet<String>(5), new HashSet<String>(5)};
         HashSet[] playersInRest = {new HashSet<String>(5), new HashSet<String>(5)};
@@ -92,7 +95,7 @@ public class FIBAJsonParser {
             if (EventType.sub.equals(event.getTyp())) {
                 HashSet<String> teamSet = playersInGameTeam[event.getTno() - 1];
                 HashSet<String> restSet = playersInRest[event.getTno() - 1];
-                String actor = event.getActor();
+                String actor = event.getActor().toString();
                 if (teamSet.contains(actor)) {
                     teamSet.remove(actor);
                     restSet.add(actor);
@@ -161,5 +164,12 @@ public class FIBAJsonParser {
 
             System.out.println(checkSum + "----------------------------------------");
         }
+    }
+
+    private static String readStreamToString(InputStream jsonInputStream) throws IOException {
+        byte[] bytes = IOUtils.toByteArray(jsonInputStream);
+
+        String str = new String(bytes, "UTF-8");
+        return str;
     }
 }

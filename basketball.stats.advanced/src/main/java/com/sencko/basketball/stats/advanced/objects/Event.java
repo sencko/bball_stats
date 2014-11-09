@@ -16,7 +16,7 @@ public class Event {
     private Integer tno;
     private Integer s2;
     private Integer gt;
-    private String desc;
+    private Action desc;
     private EventType typ;
 
     public Integer getS1() {
@@ -67,11 +67,11 @@ public class Event {
         this.gt = gt;
     }
 
-    public String getDesc() {
+    public Action getDesc() {
         return desc;
     }
 
-    public void setDesc(String desc) {
+    public void setDesc(Action desc) {
             System.out.println(desc);
         this.desc = desc;
     }
@@ -96,9 +96,9 @@ public class Event {
     public Event() {
     }
 
-    public String getActor() {
+    public Actor getActor() {
     
-        return getDesc().substring(0, getDesc().lastIndexOf(','));
+        return desc.getActor();//getDesc().substring(0, getDesc().lastIndexOf(','));
     }
     
 }

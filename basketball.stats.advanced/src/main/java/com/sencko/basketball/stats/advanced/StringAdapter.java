@@ -8,9 +8,7 @@ package com.sencko.basketball.stats.advanced;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import static com.sencko.basketball.stats.advanced.IntegerAdapter.pattern;
 import java.io.IOException;
-import java.util.regex.Matcher;
 
 /**
  *
@@ -33,7 +31,7 @@ public class StringAdapter extends TypeAdapter<String>{
             case NULL:
                 {
                     reader.nextNull();
-                    break;
+                    return null;
                 }
             case NUMBER:
                 {
@@ -45,7 +43,7 @@ public class StringAdapter extends TypeAdapter<String>{
                     if (stringValue.length() == 0) {
                         return null;
                     } else {
-                        System.out.println(stringValue);
+                    //    System.out.println(stringValue);
                         return stringValue;
                     }
                 }
