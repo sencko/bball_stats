@@ -26,11 +26,16 @@ import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
@@ -44,11 +49,14 @@ public class FIBAJsonParser {
 
   static final Logger logger = Logger.getLogger(FIBAJsonParser.class.getCanonicalName());
 
+  static Pattern teamAndTime = Pattern.compile("[\\s\\S]+<div class=\\\"team-name\\\">(\\w+)<\\/div>[\\s\\S]+<div class=\\\"team-name\\\">(\\w+)<\\/div>[\\s\\S]+Tip off: (\\d+):(\\d+)<\\/p>[\\s]*<p>(\\d+)\\/(\\d+)\\/(\\d+)[\\s\\S]+");
+
   public static void readLocation(String location) throws IOException {
     String cacheName = location.replace("/", "_").concat(".json");
     Game game = getFromCache(cacheName);
     if (game == null) {
       game = readGameFromNet(location);
+      game.setId(cacheName);
       addToCache(cacheName, game);
     }
     analyzeGame(game);
@@ -58,13 +66,33 @@ public class FIBAJsonParser {
     InputStream jsonInputStream;
     String prefix = "http://webcast-a.live.sportingpulseinternational.com/matches/";
     String suffix = "//data.json";
+    String html_suffix = "//index.html";
     URL url = new URL(prefix + location + suffix);
+
     logger.log(Level.FINEST, "Downloading file {0} from internet", url.toString());
     URLConnection connection = url.openConnection();
     connection.connect();
     jsonInputStream = connection.getInputStream();
+
     try {
-      return readGameFromStream(jsonInputStream);
+      Game game = readGameFromStream(jsonInputStream);
+      try {
+        URL html_url = new URL(prefix + location + html_suffix);
+        String html = IOUtils.toString(html_url, "UTF-8");
+        Matcher match = teamAndTime.matcher(html);
+        if (match.matches()) {
+
+          game.getTm().get(1).setTeam(match.group(1));
+          game.getTm().get(2).setTeam(match.group(2));
+          Calendar calendar = Calendar.getInstance(); //TimeZone.getTimeZone("EET")
+          calendar.set(Integer.parseInt(match.group(7)), Integer.parseInt(match.group(6)) - 1, Integer.parseInt(match.group(5)), Integer.parseInt(match.group(3)), Integer.parseInt(match.group(4)));
+          game.setDate(calendar.getTime());
+
+        }
+      } catch (Exception ex) {
+        ex.printStackTrace();
+      }
+      return game;
     } finally {
       jsonInputStream.close();
     }
@@ -213,9 +241,16 @@ public class FIBAJsonParser {
       //copy to archive1, return
       file1 = new File("archive1.zip");
       if (file1.exists()) {
-        file1.delete();
+        if (!file1.delete()) {
+          logger.log(Level.WARNING, "Unable to delete file {0}", file1.getCanonicalPath());
+          return;
+        }
       }
-      file.renameTo(file1);
+      if (!file.renameTo(file1)) {
+        logger.log(Level.WARNING, "Unable to rename file {0} to {1}", new Object[]{file.getCanonicalPath(), file1.getCanonicalPath()});
+        // unable to move to archive1 and whole operation fails!!!
+        return;
+      }
     }
 
     try (ZipOutputStream out = new ZipOutputStream(new FileOutputStream(file))) {

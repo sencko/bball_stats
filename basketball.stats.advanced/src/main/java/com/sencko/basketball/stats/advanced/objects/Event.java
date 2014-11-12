@@ -10,95 +10,96 @@ package com.sencko.basketball.stats.advanced.objects;
  * @author i028512
  */
 public class Event {
-    private Integer s1;
-    private Integer lead;
-    private Integer period;
-    private Integer tno;
-    private Integer s2;
-    private Integer gt;
-    private Action desc;
-    private EventType typ;
 
-    public Integer getS1() {
-        return s1;
-    }
+  private Integer s1;
+  private Integer lead;
+  private Integer period;
+  private Integer tno;
+  private Integer s2;
+  private Integer gt;
+  private Action desc;
+  private EventType typ;
 
-    public void setS1(Integer s1) {
-        this.s1 = s1;
-    }
+  public Integer getS1() {
+    return s1;
+  }
 
-    public Integer getLead() {
-        return lead;
-    }
+  public void setS1(Integer s1) {
+    this.s1 = s1;
+  }
 
-    public void setLead(Integer lead) {
-        this.lead = lead;
-    }
+  public Integer getLead() {
+    return lead;
+  }
 
-    public Integer getPeriod() {
-        return period;
-    }
+  public void setLead(Integer lead) {
+    this.lead = lead;
+  }
 
-    public void setPeriod(Integer period) {
-        this.period = period;
-    }
+  public Integer getPeriod() {
+    return period;
+  }
 
-    public Integer getTno() {
-        return tno;
-    }
+  public void setPeriod(Integer period) {
+    this.period = period;
+  }
 
-    public void setTno(Integer tno) {
-        this.tno = tno;
-    }
+  public Integer getTno() {
+    return tno;
+  }
 
-    public Integer getS2() {
-        return s2;
-    }
+  public void setTno(Integer tno) {
+    this.tno = tno;
+  }
 
-    public void setS2(Integer s2) {
-        this.s2 = s2;
-    }
+  public Integer getS2() {
+    return s2;
+  }
 
-    public Integer getGt() {
-        return gt;
-    }
+  public void setS2(Integer s2) {
+    this.s2 = s2;
+  }
 
-    public void setGt(Integer gt) {
-        this.gt = gt;
-    }
+  public Integer getGt() {
+    return gt;
+  }
 
-    public Action getDesc() {
-        return desc;
-    }
+  public void setGt(Integer gt) {
+    this.gt = gt;
+  }
 
-    public void setDesc(Action desc) {
-            System.out.println(desc);
-        this.desc = desc;
-    }
+  public Action getDesc() {
+    return desc;
+  }
 
-    public EventType getTyp() {
-        return typ;
-    }
+  public void setDesc(Action desc) {
+    System.out.println(desc);
+    this.desc = desc;
+  }
 
-    public void setTyp(EventType typ) {
-        this.typ = typ;
-    }
+  public EventType getTyp() {
+    return typ;
+  }
 
-    public Integer getScoring() {
-        return scoring;
-    }
+  public void setTyp(EventType typ) {
+    this.typ = typ;
+  }
 
-    public void setScoring(Integer scoring) {
-        this.scoring = scoring;
-    }
-    private Integer scoring;
+  public Integer getScoring() {
+    return scoring;
+  }
 
-    public Event() {
-    }
+  public void setScoring(Integer scoring) {
+    this.scoring = scoring;
+  }
+  private Integer scoring;
 
-    public Actor getActor() {
-    
-        return desc.getActor();//getDesc().substring(0, getDesc().lastIndexOf(','));
-    }
-    
+  public Event() {
+  }
+
+  public Actor getActor() {
+
+    return desc.getActor();//getDesc().substring(0, getDesc().lastIndexOf(','));
+  }
+
 }

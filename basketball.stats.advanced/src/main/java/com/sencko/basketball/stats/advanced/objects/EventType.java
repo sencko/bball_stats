@@ -10,5 +10,6 @@ package com.sencko.basketball.stats.advanced.objects;
  * @author i028512
  */
 public enum EventType {
-    sub,reb,fth,foo,fou,sht,tov,stl,ass,jmp,per
+
+  sub, reb, fth, foo, fou, sht, tov, stl, ass, jmp, per
 }

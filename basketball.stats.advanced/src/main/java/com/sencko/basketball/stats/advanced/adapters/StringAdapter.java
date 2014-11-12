@@ -14,41 +14,38 @@ import java.io.IOException;
  *
  * @author i028512
  */
-public class StringAdapter extends TypeAdapter<String>{
+public class StringAdapter extends TypeAdapter<String> {
 
-    @Override
-    public void write(JsonWriter writer, String t) throws IOException {
-                if (t == null) {
-            writer.nullValue();
+  @Override
+  public void write(JsonWriter writer, String t) throws IOException {
+    if (t == null) {
+      writer.nullValue();
+    } else {
+      writer.value(t);
+    }
+  }
+
+  @Override
+  public String read(JsonReader reader) throws IOException {
+    switch (reader.peek()) {
+      case NULL: {
+        reader.nextNull();
+        return null;
+      }
+      case NUMBER: {
+        return String.valueOf(reader.nextInt());
+      }
+      case STRING: {
+        String stringValue = reader.nextString().trim();
+        if (stringValue.length() == 0) {
+          return null;
         } else {
-            writer.value(t);
+          //    System.out.println(stringValue);
+          return stringValue;
         }
+      }
     }
+    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+  }
 
-    @Override
-    public String read(JsonReader reader) throws IOException {
-          switch (reader.peek()) {
-            case NULL:
-                {
-                    reader.nextNull();
-                    return null;
-                }
-            case NUMBER:
-                {
-                    return String.valueOf(reader.nextInt());
-                }
-            case STRING:
-                {
-                    String stringValue = reader.nextString().trim();
-                    if (stringValue.length() == 0) {
-                        return null;
-                    } else {
-                    //    System.out.println(stringValue);
-                        return stringValue;
-                    }
-                }
-        }
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
 }

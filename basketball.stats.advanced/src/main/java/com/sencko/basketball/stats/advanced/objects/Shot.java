@@ -10,71 +10,72 @@ package com.sencko.basketball.stats.advanced.objects;
  * @author i028512
  */
 public class Shot {
-    private Integer y;
-    private Integer p;
-    private Integer pts;
-    private Integer r;
-    private Integer per;
-    private String title;
-    private Integer x;
 
-    public Integer getY() {
-        return y;
-    }
+  private Integer y;
+  private Integer p;
+  private Integer pts;
+  private Integer r;
+  private Integer per;
+  private String title;
+  private Integer x;
 
-    public void setY(Integer y) {
-        this.y = y;
-    }
+  public Integer getY() {
+    return y;
+  }
 
-    public Integer getP() {
-        return p;
-    }
+  public void setY(Integer y) {
+    this.y = y;
+  }
 
-    public void setP(Integer p) {
-        this.p = p;
-    }
+  public Integer getP() {
+    return p;
+  }
 
-    public Integer getPts() {
-        return pts;
-    }
+  public void setP(Integer p) {
+    this.p = p;
+  }
 
-    public void setPts(Integer pts) {
-        this.pts = pts;
-    }
+  public Integer getPts() {
+    return pts;
+  }
 
-    public Integer getR() {
-        return r;
-    }
+  public void setPts(Integer pts) {
+    this.pts = pts;
+  }
 
-    public void setR(Integer r) {
-        this.r = r;
-    }
+  public Integer getR() {
+    return r;
+  }
 
-    public Integer getPer() {
-        return per;
-    }
+  public void setR(Integer r) {
+    this.r = r;
+  }
 
-    public void setPer(Integer per) {
-        this.per = per;
-    }
+  public Integer getPer() {
+    return per;
+  }
 
-    public String getTitle() {
-        return title;
-    }
+  public void setPer(Integer per) {
+    this.per = per;
+  }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+  public String getTitle() {
+    return title;
+  }
 
-    public Integer getX() {
-        return x;
-    }
+  public void setTitle(String title) {
+    this.title = title;
+  }
 
-    public void setX(Integer x) {
-        this.x = x;
-    }
+  public Integer getX() {
+    return x;
+  }
 
-    public Shot() {
-    }
-    
+  public void setX(Integer x) {
+    this.x = x;
+  }
+
+  public Shot() {
+  }
+
 }

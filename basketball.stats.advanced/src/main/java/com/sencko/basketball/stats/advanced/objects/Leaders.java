@@ -12,53 +12,54 @@ import java.util.HashMap;
  * @author i028512
  */
 public class Leaders {
-    private HashMap<Integer, PlayerShort> blocks;
-    private HashMap<Integer, PlayerShort> assists;
-    private HashMap<Integer, PlayerShort> steals;
-    private HashMap<Integer, PlayerShort> rebounds;
-    private HashMap<Integer, PlayerShort> scoring;
 
-    public Leaders() {
-    }
+  private HashMap<Integer, PlayerShort> blocks;
+  private HashMap<Integer, PlayerShort> assists;
+  private HashMap<Integer, PlayerShort> steals;
+  private HashMap<Integer, PlayerShort> rebounds;
+  private HashMap<Integer, PlayerShort> scoring;
 
-    public HashMap<Integer, PlayerShort> getBlocks() {
-        return blocks;
-    }
+  public Leaders() {
+  }
 
-    public void setBlocks(HashMap<Integer, PlayerShort> blocks) {
-        this.blocks = blocks;
-    }
+  public HashMap<Integer, PlayerShort> getBlocks() {
+    return blocks;
+  }
 
-    public HashMap<Integer, PlayerShort> getAssists() {
-        return assists;
-    }
+  public void setBlocks(HashMap<Integer, PlayerShort> blocks) {
+    this.blocks = blocks;
+  }
 
-    public void setAssists(HashMap<Integer, PlayerShort> assists) {
-        this.assists = assists;
-    }
+  public HashMap<Integer, PlayerShort> getAssists() {
+    return assists;
+  }
 
-    public HashMap<Integer, PlayerShort> getSteals() {
-        return steals;
-    }
+  public void setAssists(HashMap<Integer, PlayerShort> assists) {
+    this.assists = assists;
+  }
 
-    public void setSteals(HashMap<Integer, PlayerShort> steals) {
-        this.steals = steals;
-    }
+  public HashMap<Integer, PlayerShort> getSteals() {
+    return steals;
+  }
 
-    public HashMap<Integer, PlayerShort> getRebounds() {
-        return rebounds;
-    }
+  public void setSteals(HashMap<Integer, PlayerShort> steals) {
+    this.steals = steals;
+  }
 
-    public void setRebounds(HashMap<Integer, PlayerShort> rebounds) {
-        this.rebounds = rebounds;
-    }
+  public HashMap<Integer, PlayerShort> getRebounds() {
+    return rebounds;
+  }
 
-    public HashMap<Integer, PlayerShort> getScoring() {
-        return scoring;
-    }
+  public void setRebounds(HashMap<Integer, PlayerShort> rebounds) {
+    this.rebounds = rebounds;
+  }
 
-    public void setScoring(HashMap<Integer, PlayerShort> scoring) {
-        this.scoring = scoring;
-    }
-    
+  public HashMap<Integer, PlayerShort> getScoring() {
+    return scoring;
+  }
+
+  public void setScoring(HashMap<Integer, PlayerShort> scoring) {
+    this.scoring = scoring;
+  }
+
 }

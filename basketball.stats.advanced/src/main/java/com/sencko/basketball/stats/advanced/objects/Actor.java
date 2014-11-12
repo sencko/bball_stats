@@ -13,63 +13,63 @@ import java.util.Objects;
  */
 public class Actor {
 
-    private Integer number;
-    private String name;
+  private Integer number;
+  private String name;
 
-    /**
-     * @return the number
-     */
-    public Integer getNumber() {
-        return number;
-    }
+  /**
+   * @return the number
+   */
+  public Integer getNumber() {
+    return number;
+  }
 
-    /**
-     * @return the name
-     */
-    public String getName() {
-        return name;
-    }
+  /**
+   * @return the name
+   */
+  public String getName() {
+    return name;
+  }
 
-    /**
-     * @param name the name to set
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
+  /**
+   * @param name the name to set
+   */
+  public void setName(String name) {
+    this.name = name;
+  }
 
-    @Override
-    public String toString() {
-        return getNumber() + ", " + name;
-    }
+  @Override
+  public String toString() {
+    return getNumber() + ", " + name;
+  }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, getNumber());
-    }
+  @Override
+  public int hashCode() {
+    return Objects.hash(name, getNumber());
+  }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Actor other = (Actor) obj;
-        if (!Objects.equals(this.number, other.number)) {
-            return false;
-        }
-        if (!Objects.equals(this.name, other.name)) {
-            return false;
-        }
-        return true;
+  @Override
+  public boolean equals(Object obj) {
+    if (obj == null) {
+      return false;
     }
+    if (getClass() != obj.getClass()) {
+      return false;
+    }
+    final Actor other = (Actor) obj;
+    if (!Objects.equals(this.number, other.number)) {
+      return false;
+    }
+    if (!Objects.equals(this.name, other.name)) {
+      return false;
+    }
+    return true;
+  }
 
-    /**
-     * @param number the number to set
-     */
-    public void setNumber(Integer number) {
-        this.number = number;
-    }
+  /**
+   * @param number the number to set
+   */
+  public void setNumber(Integer number) {
+    this.number = number;
+  }
 
 }

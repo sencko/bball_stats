@@ -5,6 +5,7 @@
  */
 package com.sencko.basketball.stats.advanced.objects;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -14,65 +15,107 @@ import java.util.List;
  */
 public class Game {
 
-    private Integer period;
-    private List<Event> pbp;
-    private String clock;
-    private Object[][] leaddata;
-    private Object[][] scoring;
-    private HashMap<Integer, TeamStats> tm;
+  private static transient Game currentGame;
 
-    public Integer getPeriod() {
-        return period;
-    }
+  /**
+   * @return the currentGame
+   */
+  public static Game getCurrentGame() {
+    return currentGame;
+  }
 
-    public void setPeriod(Integer period) {
-        this.period = period;
-    }
+  private Integer period;
+  private List<Event> pbp;
+  private String clock;
+  private Object[][] leaddata;
+  private Object[][] scoring;
+  private HashMap<Integer, TeamStats> tm;
+  private Date date;
+  private String id;
 
-    public List<Event> getPbp() {
-        return pbp;
-    }
+  public Game() {
+    currentGame = this;
+  }
 
-    public void setPbp(List<Event> pbp) {
-        this.pbp = pbp;
-    }
+  public Integer getPeriod() {
+    return period;
+  }
 
-    public String getClock() {
-        return clock;
-    }
+  public void setPeriod(Integer period) {
+    this.period = period;
+  }
 
-    public void setClock(String clock) {
-        this.clock = clock;
-    }
+  public List<Event> getPbp() {
+    return pbp;
+  }
 
-    public Object[][] getLeaddata() {
-        return leaddata;
-    }
+  public void setPbp(List<Event> pbp) {
+    this.pbp = pbp;
+  }
 
-    public Object[][] getScoring() {
-        return scoring;
-    }
+  public String getClock() {
+    return clock;
+  }
 
+  public void setClock(String clock) {
+    this.clock = clock;
+  }
 
-    public HashMap<Integer, TeamStats> getTm() {
-        return tm;
-    }
+  public Object[][] getLeaddata() {
+    return leaddata;
+  }
 
-    public void setTm(HashMap<Integer, TeamStats> tm) {
-        this.tm = tm;
-    }
+  public Object[][] getScoring() {
+    return scoring;
+  }
 
-    /**
-     * @param leaddata the leaddata to set
-     */
-    public void setLeaddata(Object[][] leaddata) {
-        this.leaddata = leaddata;
-    }
+  public HashMap<Integer, TeamStats> getTm() {
+    return tm;
+  }
 
-    /**
-     * @param scoring the scoring to set
-     */
-    public void setScoring(Object[][] scoring) {
-        this.scoring = scoring;
-    }
+  public void setTm(HashMap<Integer, TeamStats> tm) {
+    this.tm = tm;
+  }
+
+  /**
+   * @param leaddata the leaddata to set
+   */
+  public void setLeaddata(Object[][] leaddata) {
+    this.leaddata = leaddata;
+  }
+
+  /**
+   * @param scoring the scoring to set
+   */
+  public void setScoring(Object[][] scoring) {
+    this.scoring = scoring;
+  }
+
+  /**
+   * @return the date
+   */
+  public Date getDate() {
+    return date;
+  }
+
+  /**
+   * @param date the date to set
+   */
+  public void setDate(Date date) {
+    this.date = date;
+  }
+
+  /**
+   * @return the id
+   */
+  public String getId() {
+    return id;
+  }
+
+  /**
+   * @param id the id to set
+   */
+  public void setId(String id) {
+    this.id = id;
+  }
 }

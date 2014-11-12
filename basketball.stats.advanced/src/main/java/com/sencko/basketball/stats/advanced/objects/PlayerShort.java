@@ -10,44 +10,45 @@ package com.sencko.basketball.stats.advanced.objects;
  * @author i028512
  */
 public class PlayerShort {
-    private Integer tot;
-    private String photo;
-    private String name;
-    private Integer no;
 
-    public PlayerShort() {
-    }
+  private Integer tot;
+  private String photo;
+  private String name;
+  private Integer no;
 
-    public Integer getTot() {
-        return tot;
-    }
+  public PlayerShort() {
+  }
 
-    public void setTot(Integer tot) {
-        this.tot = tot;
-    }
+  public Integer getTot() {
+    return tot;
+  }
 
-    public String getPhoto() {
-        return photo;
-    }
+  public void setTot(Integer tot) {
+    this.tot = tot;
+  }
 
-    public void setPhoto(String photo) {
-        this.photo = photo;
-    }
+  public String getPhoto() {
+    return photo;
+  }
 
-    public String getName() {
-        return name;
-    }
+  public void setPhoto(String photo) {
+    this.photo = photo;
+  }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public Integer getNo() {
-        return no;
-    }
+  public void setName(String name) {
+    this.name = name;
+  }
 
-    public void setNo(Integer no) {
-        this.no = no;
-    }
-    
+  public Integer getNo() {
+    return no;
+  }
+
+  public void setNo(Integer no) {
+    this.no = no;
+  }
+
 }

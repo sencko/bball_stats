@@ -11,44 +11,44 @@ package com.sencko.basketball.stats.advanced.objects;
  */
 public class Action {
 
-    private Actor actor;
-    private String description;
+  private Actor actor;
+  private String description;
 
-    /**
-     * @return the actor
-     */
-    public Actor getActor() {
-        return actor;
-    }
+  /**
+   * @return the actor
+   */
+  public Actor getActor() {
+    return actor;
+  }
 
-    /**
-     * @return the description
-     */
-    public String getDescription() {
-        return description;
-    }
+  /**
+   * @return the description
+   */
+  public String getDescription() {
+    return description;
+  }
 
-    /**
-     * @param description the description to set
-     */
-    public void setDescription(String description) {
-        this.description = description;
-    }
+  /**
+   * @param description the description to set
+   */
+  public void setDescription(String description) {
+    this.description = description;
+  }
 
-    /**
-     * @param actor the actor to set
-     */
-    public void setActor(Actor actor) {
-        this.actor = actor;
-    }
+  /**
+   * @param actor the actor to set
+   */
+  public void setActor(Actor actor) {
+    this.actor = actor;
+  }
 
-    @Override
-    public String toString() {
-        if (actor == null) {
-            return description;
-        } else {
-            return actor + ", " + description;
-        }
+  @Override
+  public String toString() {
+    if (actor == null) {
+      return description;
+    } else {
+      return actor + ", " + description;
     }
+  }
 
 }
